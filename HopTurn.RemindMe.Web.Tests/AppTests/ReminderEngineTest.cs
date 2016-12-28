@@ -16,12 +16,7 @@ namespace HopTurn.RemindMe.Web.Tests.AppTests
             IReminderEngine engine = new ReminderEngine();
             IReminder reminder = new MockReminder()
             {
-                Condition = new MockCondition()
-                {
-                    IsConditionMet = (obj) => {
-                        return true;
-                    }
-                },
+                Condition = new MockTrueCondition(),
                 Message = new MockMessage()
                 {
                     DoMessage = (obj) => {
@@ -45,9 +40,12 @@ namespace HopTurn.RemindMe.Web.Tests.AppTests
         public Action<object> DoMessage { get; set; }
     }
 
-    internal class MockCondition : IReminderCondition
+    internal class MockTrueCondition : IReminderCondition
     {
-        public Func<object,bool> IsConditionMet { get; set; }
+        public bool IsConditionMet()
+        {
+            return true;
+        }
     }
 
     internal class MockReminder : IReminder

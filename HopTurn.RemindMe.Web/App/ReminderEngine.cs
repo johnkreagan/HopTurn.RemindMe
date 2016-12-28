@@ -22,7 +22,7 @@ namespace HopTurn.RemindMe.Web
             
             foreach (IReminder reminder in Reminders)
             {
-                if (reminder.Condition?.IsConditionMet.Invoke(null) == true)
+                if (reminder.Condition?.IsConditionMet() == true)
                 {
                     reminder.Message.DoMessage.Invoke(null);
                 }
