@@ -17,5 +17,16 @@ namespace HopTurn.RemindMe.Web.Tests.ConditionTests
 
             Assert.IsTrue(condition.IsConditionMet());
         }
+
+        [TestMethod]
+        public void TestReminderIsNotTriggeredIfTririggerdTimeIsInFuture()
+        {
+
+            OneTimeReminderCondition condition = new OneTimeReminderCondition();
+
+            condition.TriggerTime = DateTime.Now.AddMinutes(15);
+
+            Assert.IsFalse(condition.IsConditionMet());
+        }
     }
 }

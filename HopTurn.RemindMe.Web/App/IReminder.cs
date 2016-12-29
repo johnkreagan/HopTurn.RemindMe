@@ -4,7 +4,8 @@
     {
 
         IReminderCondition Condition { get; set; }
-        IReminderMessage Message { get; set; }
 
+        IReminderMessage Message { get; set; }
+        
     }
 }
