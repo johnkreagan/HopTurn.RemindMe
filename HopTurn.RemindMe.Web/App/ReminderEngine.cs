@@ -8,9 +8,9 @@ namespace HopTurn.RemindMe.Web
 {
     public class ReminderEngine : IReminderEngine
     {
-        private List<IReminder> _reminders = new List<IReminder>();
+        private List<Reminder> _reminders = new List<Reminder>();
 
-        public List<IReminder> Reminders
+        public List<Reminder> Reminders
         {
             get { return _reminders; }
             set { _reminders = value; }
@@ -20,11 +20,11 @@ namespace HopTurn.RemindMe.Web
         public async void RunEngine()
         {
             
-            foreach (IReminder reminder in Reminders)
+            foreach (Reminder reminder in Reminders)
             {
                 if (reminder.Condition?.IsConditionMet() == true)
                 {
-                    reminder.Message.DoMessage.Invoke(null);
+                    reminder.Message.SendMessage();
                 }
             }
                 

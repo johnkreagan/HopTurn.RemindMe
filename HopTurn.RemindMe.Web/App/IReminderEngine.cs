@@ -10,7 +10,7 @@ namespace HopTurn.RemindMe.Web.App
     {
 
 
-        List<IReminder> Reminders {
+        List<Reminder> Reminders {
             get; set;
         }
 

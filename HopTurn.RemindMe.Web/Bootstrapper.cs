@@ -31,6 +31,7 @@ namespace HopTurn.RemindMe.Web
         {
             var container = new UnityContainer();
             container.RegisterType<IReminderEngine, ReminderEngine>();
+            container.RegisterType<IReminderRepository, ReminderRepository>();
             //container.RegisterInstance<IReminderEngine>(new ReminderEngine());
 
             //DependencyContainer.SetResolver(container);

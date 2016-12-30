@@ -11,46 +11,50 @@ namespace HopTurn.RemindMe.Web.Tests.AppTests
         public void TestReminderIsTriggeredWhenConditionIsMet()
         {
 
-            bool wasReminderTriggered = false;
-
+            
             IReminderEngine engine = new ReminderEngine();
-            IReminder reminder = new MockReminder()
+            
+
+            Reminder reminder = new MockReminder()
             {
                 Condition = new MockTrueCondition(),
                 Message = new MockMessage()
-                {
-                    DoMessage = (obj) => {
-                        wasReminderTriggered = true;
-                        Console.WriteLine("Condition is Met");
-                    }
-                }
             };
             
             engine.Reminders.Add(reminder);
 
             engine.RunEngine();
 
-            Assert.IsTrue(wasReminderTriggered);
+            Assert.IsTrue(reminder.Message.Status == MessageStatus.Sent);
 
         }
     }
 
-    internal class MockMessage : IReminderMessage
+    internal class MockMessage : ReminderMessage
     {
-        public Action<object> DoMessage { get; set; }
+        public override void SendMessage()
+        {
+            this.DoMessage(null);
+            this.Status = MessageStatus.Sent;
+        }
+
+        protected override void DoMessage(object obj)
+        {
+
+            Console.WriteLine("Condition is Met");
+        }
     }
 
-    internal class MockTrueCondition : IReminderCondition
+    internal class MockTrueCondition : ReminderCondition
     {
-        public bool IsConditionMet()
+        public override bool IsConditionMet()
         {
             return true;
         }
     }
 
-    internal class MockReminder : IReminder
+    internal class MockReminder : Reminder
     {
-        public IReminderCondition Condition { get; set; }
-        public IReminderMessage Message { get; set; }
+
     }
 }

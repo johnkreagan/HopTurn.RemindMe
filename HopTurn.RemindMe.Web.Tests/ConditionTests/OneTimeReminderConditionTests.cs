@@ -1,6 +1,7 @@
 ﻿using System;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using HopTurn.RemindMe.Web.Models;
+using HopTurn.RemindMe.Web.Models.Reminders;
 
 namespace HopTurn.RemindMe.Web.Tests.ConditionTests
 {
